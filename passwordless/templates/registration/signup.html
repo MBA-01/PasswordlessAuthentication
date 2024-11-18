@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block title %}login{% endblock %}
+{% block content %}
+
+
+<div align="center">
+ <h2>Register</h2>
+ <form method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+             <br/> <hr/>
+             <button type="submit"> Register </button> <br/> <hr/>
+
+ </form>
+</div>
+{% endblock %}
+
+</body>
+</html>

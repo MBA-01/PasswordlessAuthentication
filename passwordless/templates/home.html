@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+{%extends 'base.html' %}
+{% block title %} Home {% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<a href="{% url 'logout' %}">Log Out</a>
+{% else %}
+  <p> You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> </br>
+  <a href="{% url 'signup' %}">Signup</a> </br>
+  <a href="{% url 'registration2' %}">registration</a> </br>
+  <a href="{% url 'passwordlesslogin' %}">passwordless Login</a> </br>
+  <a href="{% url 'passwordfullogin' %}">passwordful Login</a> </br>
+{% endif %}
+{% endblock %}
+
+</body>
+</html>

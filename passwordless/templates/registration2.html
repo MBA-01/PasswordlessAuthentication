@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block title %}login{% endblock %}
+{% block content %}
+
+
+<div align="center">
+ <h2>Register</h2>
+ <form id="registration-form" method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    {% if form.non_field_errors %}
+        <div class="error">
+            {{ form.non_field_errors }}
+        </div>
+    {% endif %}
+    <input type="hidden" name="DeviceType" id="device_type">
+    <input type="hidden" name="MACAddress" id="mac_address">
+             <br/> <hr/>
+             <button type="submit"> Register </button> <br/> <hr/>
+
+ </form>
+
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Get the user agent
+        document.getElementById('device_type').value = navigator.userAgent;
+
+        // Get the IP address (this example uses a third-party service)
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('mac_address').value = data.ip;  // Using IP instead of MAC
+            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+            });
+    });
+
+    // Ensure the hidden fields are populated before the form is submitted
+    document.getElementById('registration-form').addEventListener('submit', function(event) {
+        if (!document.getElementById('mac_address').value || !document.getElementById('device_type').value) {
+            event.preventDefault();  // Prevent form submission
+            alert('Please wait for the hidden fields to be populated.');
+        }
+    });
+</script>
+{% endblock %}
+
+</body>
+</html>
